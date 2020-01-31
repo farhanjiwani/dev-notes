@@ -112,7 +112,7 @@ module: {
 }
 ```
 
-- add `rules` (_Array_) inside `modules` (_Object_)
+- add `rules` (_Array_) inside `module` (_Object_)
   - **NOTE:** loaders will get loaded in **reverse order**
 - `css-loader` takes your CSS and turns it into JS
 - `style-loader` will inject the "css-loaded" JS to the DOM via `<style>` tag
@@ -132,8 +132,8 @@ module: {
             test: /\.scss$/,
             use: [
                 "style-loader", //3. Inject styles into DOM
-                "css-loader", //2. Turns css into commonjs
-                "sass-loader" //1. Turns sass into css
+                "css-loader",   //2. Turns CSS into commonjs
+                "sass-loader"   //1. Turns SCSS into CSS
             ]
         }
     ];
@@ -142,7 +142,7 @@ module: {
 
 - `sass-loader` loads a SASS or SCSS file and compiles it into CSS
   - requires `css-loader` after the fact to compile into JS module
-  - recommended to use `mini-css-extract-plugin` to extract it out into a separate file
+  - recommended to use `mini-css-extract-plugin` to extract it out into a separate file for production
 
 ## Cache Busting and Plugins
 
@@ -210,8 +210,8 @@ module.exports = {
                 test: /\.scss$/,
                 use: [
                     "style-loader", //3. Inject styles into DOM
-                    "css-loader", //2. Turns css into commonjs
-                    "sass-loader" //1. Turns sass into css
+                    "css-loader",   //2. Turns css into commonjs
+                    "sass-loader"   //1. Turns sass into css
                 ]
             }
         ];
@@ -268,7 +268,7 @@ npm install --save clean-webpack-plugin
 
 - `html-loader` exports HTML as string. HTML is minimized when the compiler demands.
 - `file-loader` resolves `import`/`require()` on a file into a url and emits the file into the output directory.
-- `html-loader` will encounter the `src` attribute (eg for ah `<img>` tag) and `file-loader` will take control on how to handle the source file based on the configured `test` option.
+- `html-loader` will encounter the `src` attribute (eg. for an `<img>` tag) and `file-loader` will take control on how to handle the source file based on the configured `test` option.
 
 ```javascript
 /// webpack.common.js (module.exports)
@@ -382,7 +382,7 @@ module.exports = merge(common, {
             {
                 test: /\.scss$/,
                 use: [
-                    MiniCssExtractPlugin.loader, // Extract css into files
+                    MiniCssExtractPlugin.loader, // Extract CSS into files
                     "css-loader",
                     "sass-loader"
                 ]
@@ -490,8 +490,8 @@ module.exports = merge(common, {
                 test: /\.scss$/,
                 use: [
                     "style-loader", //3. Inject styles into DOM
-                    "css-loader",   //2. Turns css into commonjs
-                    "sass-loader"   //1. Turns sass into css
+                    "css-loader",   //2. Turns CSS into commonjs
+                    "sass-loader"   //1. Turns SCSS into CSS
                 ]
             }
         ]
@@ -539,7 +539,7 @@ module.exports = merge(common, {
             {
                 test: /\.scss$/,
                 use: [
-                    MiniCssExtractPlugin.loader, // Extract css into files
+                    MiniCssExtractPlugin.loader, // Extract CSS into files
                     "css-loader",
                     "sass-loader"
                 ]
