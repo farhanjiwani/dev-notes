@@ -4,8 +4,22 @@
 >
 > - video: [Learn Webpack - Full Tutorial for Beginners](https://www.youtube.com/watch?v=MpGLUVbqoYQ)
 > - repo: [https://github.com/Colt/webpack-demo-app](https://github.com/Colt/webpack-demo-app)
+> - Webpack version: **4.29.6**
 
 At its core, Webpack is a static module bundler for modern JavaScript applications. When Webpack processes your application, it internally builds a dependency graph which maps every module your project needs and generates one or more bundles. [Source: <cite><https://webpack.js.org/concepts/></cite>]
+
+## Table of Contents
+
+1. [Installing and Running Webpack and Webpack-CLI](https://github.com/farhanjiwani/dev-notes/blob/master/tools/Webpack.md#installing-and-running-webpack-and-webpack-cli)
+2. [Imports, Exports, & Webpack Modules](https://github.com/farhanjiwani/dev-notes/blob/master/tools/Webpack.md#imports-exports--webpack-modules)
+3. [Configuring Webpack](https://github.com/farhanjiwani/dev-notes/blob/master/tools/Webpack.md#configuring-webpack)
+4. [Loaders, CSS, & SASS](https://github.com/farhanjiwani/dev-notes/blob/master/tools/Webpack.md#loaders-css--sass)
+5. [Cache Busting and Plugins](https://github.com/farhanjiwani/dev-notes/blob/master/tools/Webpack.md#cache-busting-and-plugins)
+6. [Splitting Dev & Production](https://github.com/farhanjiwani/dev-notes/blob/master/tools/Webpack.md#splitting-dev--production)
+7. [Html-loader, File-loader, & Clean-webpack](https://github.com/farhanjiwani/dev-notes/blob/master/tools/Webpack.md#html-loader-file-loader--clean-webpack)
+8. [Multiple Entrypoints & Vendor.js](https://github.com/farhanjiwani/dev-notes/blob/master/tools/Webpack.md#multiple-entrypoints--vendorjs)
+9. [Extract CSS & Minify HTML/CSS/JS](https://github.com/farhanjiwani/dev-notes/blob/master/tools/Webpack.md#extract-css--minify-htmlcssjs)
+10. [Appendix - Example Files](https://github.com/farhanjiwani/dev-notes/blob/master/tools/Webpack.md#appendix---example-files)
 
 ## Installing and Running Webpack and Webpack-CLI
 
