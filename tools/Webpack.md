@@ -1,5 +1,7 @@
 # Webpack
 
+![Webpack logo](https://webpack.js.org/e0b5805d423a4ec9473ee315250968b2.svg)
+
 > **Reference**: YouTube video on `freeCodeCamp.org`'s channel by Colt Steele
 >
 > - video: [Learn Webpack - Full Tutorial for Beginners](https://www.youtube.com/watch?v=MpGLUVbqoYQ)
@@ -479,7 +481,7 @@ module.exports = merge(common, {
         filename: "[name].bundle.js",
         path: path.resolve(__dirname, "dist")
     },
-    plugins:[
+    plugins: [
         new HtmlWebpackPlugin({
             template: "./src/template.html"
         })

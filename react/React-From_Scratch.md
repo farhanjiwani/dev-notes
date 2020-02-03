@@ -17,6 +17,7 @@ Anyway, this tutorial works but it is by no means complete or following the best
 >   - **node v13.7.0**
 >   - **npm v6.13.6**
 >   - **yarn v1.21.1**
+>   - For versions of Babel, Webpack and React reference [Appendix - Final `package.json`](https://github.com/farhanjiwani/dev-notes/blob/master/react/React-From_Scratch.md#appendix---final-packagejson)
 
 ## Setup
 
