@@ -6,7 +6,11 @@ If you come across these notes, I hope they help! Feel free to leave feedback or
 
 ## Sections
 
-### React
+### JavaScript
+
+- [Exception Handling in JavaScript](https://github.com/farhanjiwani/dev-notes/blob/master/javascript/Exception_Handling.md)
+
+#### React
 
 - [Create React App From Scratch](https://github.com/farhanjiwani/dev-notes/blob/master/react/React-From_Scratch.md) &mdash; Create your react app without relying on a pre-packaged toolchain.
 - [State Management with Hooks](https://github.com/farhanjiwani/dev-notes/blob/master/react/React-State_Management_with_Hooks.md) &mdash; `useReducer` and dispatchers
