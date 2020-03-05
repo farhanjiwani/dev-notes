@@ -51,10 +51,12 @@ If the linter is barking at a problem that you **WANT** to keep, modify your con
 
 #### ESLint Configuration Examples
 
+- env: `require` instead of `import`
+- rules: disables use of `console.log`
+
 ```json
 {
     "env": {
-        // `require` instead of `import`
         "commonjs": true,
         "es6": true,
         "node": true
@@ -64,16 +66,20 @@ If the linter is barking at a problem that you **WANT** to keep, modify your con
         "ecmaVersion": 2018
     },
     "rules": {
-        // disables `console.log`
         "no-console": "error"
     }
 }
 ```
 
+- env: include all the global variables from these
+- rules:
+  - generate warning when `console.log` is used
+  - disables use of `eval`
+  - error if import statement comes after non-import statements
+
 ```json
 {
     "env": {
-        // include all these global variables
         "browser": true,
         "jest": true,
         "es6": true
@@ -86,9 +92,7 @@ If the linter is barking at a problem that you **WANT** to keep, modify your con
     },
     "rules": {
         "no-console": "warn",
-        // disables `eval`
         "no-eval": "error",
-        // error if import statement comes after non-import statements
         "import/first": "error"
     }
 }
@@ -112,3 +116,8 @@ Script examples for `package.json`:
     }
 }
 ```
+
+- Here you can:
+  - lint entire codebase
+  - lint and try to fix
+  - lint only js and jsx files
