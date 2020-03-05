@@ -9,6 +9,7 @@ If you come across these notes, I hope they help! Feel free to leave feedback or
 ### JavaScript
 
 - [Exception Handling in JavaScript](https://github.com/farhanjiwani/dev-notes/blob/master/javascript/Exception_Handling.md)
+- [Linting](https://github.com/farhanjiwani/dev-notes/blob/master/javascript/Linting.md)
 
 #### React
 
@@ -20,6 +21,14 @@ If you come across these notes, I hope they help! Feel free to leave feedback or
 - npm
   - [Verdaccio](https://github.com/farhanjiwani/dev-notes/blob/master/tools/npm-Verdaccio.md) &mdash; A lightweight private npm proxy registry.
 - [Webpack](https://github.com/farhanjiwani/dev-notes/blob/master/tools/Webpack.md) &mdash; An in-depth guide aimed for beginners.
+
+## Articles
+
+### React Articles
+
+#### CSS-in-JS
+
+- [The unseen performance costs of modern CSS-in-JS libraries in React apps](https://calendar.perfplanet.com/2019/the-unseen-performance-costs-of-css-in-js-in-react-apps/)
 
 ## Quick Reference
 
