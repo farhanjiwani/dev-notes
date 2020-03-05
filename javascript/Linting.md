@@ -107,11 +107,8 @@ Script examples for `package.json`:
 ```json
 {
     "scripts": {
-        // lint entire codebase
         "lint": "eslint .",
-        // lint and try to fix
         "lint:fix": "eslint --fix .",
-        // lint only js and jsx files
         "lint:js": "eslint '**/*.js?(x)' --fix",
     }
 }
