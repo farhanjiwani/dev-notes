@@ -16,6 +16,13 @@ If you come across these notes, I hope they help! Feel free to leave feedback or
 - [Create React App From Scratch](https://github.com/farhanjiwani/dev-notes/blob/master/react/React-From_Scratch.md) &mdash; Create your react app without relying on a pre-packaged toolchain.
 - [State Management with Hooks](https://github.com/farhanjiwani/dev-notes/blob/master/react/React-State_Management_with_Hooks.md) &mdash; `useReducer` and dispatchers
 
+#### Performance
+
+- use HTTP/2
+- split vendor packages into their own bundle
+  - [split react components](https://reacttraining.com/react-router/web/guides/code-splitting)
+  - [webpack code splitting and dynamic imports](https://webpack.js.org/guides/code-splitting/#prefetchingpreloading-modules)
+
 ### Tools
 
 - npm
