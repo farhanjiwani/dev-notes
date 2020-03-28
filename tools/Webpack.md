@@ -21,7 +21,7 @@ At its core, Webpack is a static module bundler for modern JavaScript applicatio
 7. [Html-loader, File-loader, & Clean-webpack](https://github.com/farhanjiwani/dev-notes/blob/master/tools/Webpack.md#html-loader-file-loader--clean-webpack)
 8. [Multiple Entrypoints & Vendor.js](https://github.com/farhanjiwani/dev-notes/blob/master/tools/Webpack.md#multiple-entrypoints--vendorjs)
 9. [Extract CSS & Minify HTML/CSS/JS](https://github.com/farhanjiwani/dev-notes/blob/master/tools/Webpack.md#extract-css--minify-htmlcssjs)
-10. [Appendix - Example Files](https://github.com/farhanjiwani/dev-notes/blob/master/tools/Webpack.md#appendix---example-files)
+10. [Appendix - Example Files](https://github.com/farhanjiwani/dev-notes/blob/master/tools/Webpack.md#appendix---example-files) (Updated March 28, 2020)
 
 ## Installing and Running Webpack and Webpack-CLI
 
@@ -131,7 +131,7 @@ npm install --save-dev node-sass sass-loader
 module: {
     rules: [
         {
-            test: /\.scss$/,
+            test: /\.s?css$/,
             use: [
                 "style-loader", //3. Inject styles into DOM
                 "css-loader",   //2. Turns CSS into commonjs
@@ -209,7 +209,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.scss$/,
+                test: /\.s?css$/,
                 use: [
                     "style-loader", //3. Inject styles into DOM
                     "css-loader",   //2. Turns css into commonjs
@@ -298,6 +298,7 @@ module: {
 
 - `clean-webpack-plugin` will delete the `./dist` dir every build
   - can add it to `dev` config but in this case we are using `webpack-dev-server` for dev which uses memory instead of a `dist` folder
+  - **WARNING:** make sure your config's `output` is pointing to a folder (such as `dist`) where no critical files are located!
 
 ```javascript
 /// webpack.prod.js
@@ -311,6 +312,8 @@ module.exports = merge(common, {
 ```
 
 ## Multiple Entrypoints & Vendor.js
+
+**Note:** This is not recommended in Webpack 4. Please see [`optimizationsplitchunks`](https://webpack.js.org/configuration/optimization/#optimizationsplitchunks) or [code splitting](https://webpack.js.org/guides/code-splitting/)
 
 Sometimes you might want to separate out our app code from vendor code. Vendor code changes much less frequently so a vendor bundle can be cached while the main bundle can cache bust as needed.
 
@@ -382,7 +385,7 @@ module.exports = merge(common, {
     module: {
         rules: [
             {
-                test: /\.scss$/,
+                test: /\.s?css$/,
                 use: [
                     MiniCssExtractPlugin.loader, // Extract CSS into files
                     "css-loader",
@@ -441,55 +444,83 @@ module.exports = merge(common, {
 
 ```javascript
 /// webpack.common.js
+const webpack = require("webpack");
+const path = require("path");
+
 module.exports = {
-    entry: {
-        main: "./src/index.js",
-        vendor: "./src/vendor.js"
-    },
+    // build the bundle from ./src/index.js and include common JS polyfills
+    entry: ["@babel/polyfill", "./src/index.js"],
     module: {
         rules: [
             {
-                test: /\.html$/,
-                use: ["html-loader"]
+                test: /\.module\.s?css$/,
+                include: path.resolve(__dirname, "./src"),
+                exclude: [/node_modules/],
+                use: [
+                    "style-loader",
+                    {
+                        loader: "css-loader",
+                        options: {
+                            // enable CSS Modules
+                            modules: {
+                                localIdentName: "[local]__[hash:base64:5]"
+                            }
+                        }
+                    },
+                    "sass-loader"
+                ]
             },
             {
-                test: /\.(svg|png|jpg|gif)$/,
-                use: {
-                    loader: "file-loader",
-                    options: {
-                        esModule: false,
-                        name: "[name].[hash].[ext]",
-                        outputPath: "assets"
-                    }
+                test: /\.jsx?$/,
+                include: path.resolve(__dirname, "./src"),
+                exclude: [/node_modules/],
+                loader: "babel-loader",
+                query: {
+                    plugins: [
+                        "@babel/transform-react-jsx",
+                        ["react-css-modules"]
+                    ]
                 }
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                    {
+                        loader: "file-loader",
+                        options: {
+                            outputPath: "images/",
+                            name: "[name].[ext]"
+                        }
+                    }
+                ]
             }
         ]
-    }
+    },
+    resolve: { extensions: ["*", ".js", ".jsx", ".scss"] },
+    plugins: [new webpack.ProgressPlugin()]
 };
 ```
 
 ```javascript
 /// webpack.dev.js
+const webpack = require("webpack");
+const merge = require("webpack-merge");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require("path");
 const common = require("./webpack.common");
-const merge = require("webpack-merge");
-var HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = merge(common, {
     mode: "development",
     output: {
-        filename: "[name].bundle.js",
+        filename: "bundle.js",
         path: path.resolve(__dirname, "dist")
     },
-    plugins: [
-        new HtmlWebpackPlugin({
-            template: "./src/template.html"
-        })
-    ],
     module: {
         rules: [
             {
-                test: /\.scss$/,
+                test: /\.s?css$/,
+                include: [path.resolve(__dirname, "./src")],
+                exclude: [/node_modules/, /\.module\.s?css$/],
                 use: [
                     "style-loader", //3. Inject styles into DOM
                     "css-loader",   //2. Turns CSS into commonjs
@@ -497,20 +528,33 @@ module.exports = merge(common, {
                 ]
             }
         ]
+    },
+    plugins: [
+        new HtmlWebpackPlugin({
+            template: "./public/index.html"
+        }),
+        new webpack.HotModuleReplacementPlugin()
+    ],
+    devServer: {
+        contentBase: path.join(__dirname, "public/"),
+        port: 3000,
+        publicPath: "http://localhost:3000/",
+        hotOnly: true
     }
 });
+
 ```
 
 ```javascript
 /// webpack.prod.js
-const path = require("path");
-const common = require("./webpack.common");
 const merge = require("webpack-merge");
-const CleanWebpackPlugin = require("clean-webpack-plugin");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const OptimizeCssAssetsPlugin = require("optimize-css-assets-webpack-plugin");
 const TerserPlugin = require("terser-webpack-plugin");
-var HtmlWebpackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require("path");
+const common = require("./webpack.common");
 
 module.exports = merge(common, {
     mode: "production",
@@ -523,7 +567,8 @@ module.exports = merge(common, {
             new OptimizeCssAssetsPlugin(),
             new TerserPlugin(),
             new HtmlWebpackPlugin({
-                template: "./src/template.html",
+                inject: true,
+                template: "./public/index.html",
                 minify: {
                     removeAttributeQuotes: true,
                     collapseWhitespace: true,
@@ -539,12 +584,10 @@ module.exports = merge(common, {
     module: {
         rules: [
             {
-                test: /\.scss$/,
-                use: [
-                    MiniCssExtractPlugin.loader, // Extract CSS into files
-                    "css-loader",
-                    "sass-loader"
-                ]
+                test: /\.s?css$/, // but ignore (S)CSS modules (see `exclude`)
+                include: [path.resolve(__dirname, "./src")],
+                exclude: [/node_modules/, /\.module\.s?css$/],
+                use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"]
             }
         ]
     }
