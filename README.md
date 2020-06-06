@@ -6,6 +6,11 @@ If you come across these notes, I hope they help! Feel free to leave feedback or
 
 ## Sections
 
+### CSS
+
+- [Selectors Explained (tool)](https://hugogiraudel.github.io/selectors-explained/)
+- [CSS Modules](https://glenmaddern.com/articles/css-modules)
+
 ### JavaScript
 
 - [Exception Handling in JavaScript](https://github.com/farhanjiwani/dev-notes/blob/master/javascript/Exception_Handling.md)
@@ -22,6 +27,7 @@ If you come across these notes, I hope they help! Feel free to leave feedback or
 - split vendor packages into their own bundle
   - [split react components](https://reacttraining.com/react-router/web/guides/code-splitting)
   - [webpack code splitting and dynamic imports](https://webpack.js.org/guides/code-splitting/#prefetchingpreloading-modules)
+- [Performance Tips for Background Video](https://github.com/farhanjiwani/dev-notes/blob/master/html/React-From_Scratch.md)
 
 ### Tools
 
@@ -40,6 +46,33 @@ If you come across these notes, I hope they help! Feel free to leave feedback or
 ## Quick Reference
 
 This section for notes that don't need their own files just yet.
+
+### React Tips
+
+#### Hooks
+
+- [Thinking in React Hooks](https://wattenberger.com/blog/react-hooks)
+
+#### Indeterminate Form Fields
+
+> To add the indeterminate property to the checkbox, we need to take advantage of the `ref` attribute:
+>
+> ```javascript
+> const { value, checked, indeterminate } = this.props
+>
+> return render(
+>   <input
+>     type="checkbox"
+>     value={value}
+>     checked={checked}
+>     ref={el => el && (el.indeterminate = indeterminate)}
+>   />
+> );
+> ```
+>
+> Since the `ref` is run on each render, the indeterminate property is updated appropriately, and thus the checkbox appears as expected.
+>
+> <cite>David Walsh &mdash; [React Indeterminate](https://davidwalsh.name/react-indeterminate)</cite>
 
 ### npm
 
