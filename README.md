@@ -27,7 +27,7 @@ If you come across these notes, I hope they help! Feel free to leave feedback or
 - split vendor packages into their own bundle
   - [split react components](https://reacttraining.com/react-router/web/guides/code-splitting)
   - [webpack code splitting and dynamic imports](https://webpack.js.org/guides/code-splitting/#prefetchingpreloading-modules)
-- [Performance Tips for Background Video](https://github.com/farhanjiwani/dev-notes/blob/master/html/React-From_Scratch.md)
+- [Performance Tips for Background Video](https://github.com/farhanjiwani/dev-notes/blob/master/html/Performance_Tips_for_Background_Video.md)
 
 ### Tools
 
