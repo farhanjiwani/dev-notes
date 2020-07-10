@@ -15,6 +15,7 @@ If you come across these notes, I hope they help! Feel free to leave feedback or
 
 - [Exception Handling in JavaScript](https://github.com/farhanjiwani/dev-notes/blob/master/javascript/Exception_Handling.md)
 - [Linting](https://github.com/farhanjiwani/dev-notes/blob/master/javascript/Linting.md)
+- [`Object.is()` vs. Strict Equality Operator in JavaScript](https://github.com/farhanjiwani/dev-notes/blob/master/javascript/Object.is()_vs_Strict_Equality_Operator.md)
 
 #### React
 
